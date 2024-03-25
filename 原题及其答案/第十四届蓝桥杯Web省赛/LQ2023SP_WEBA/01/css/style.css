@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #242333;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  perspective: 1000px;
+  width: 470px;
+}
+
+.screen {
+  background-color: #fff;
+  height: 70px;
+  width: 100%;
+  transform: rotateX(-45deg);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+  color: #242333;
+  text-align: center;
+  line-height: 70px;
+  font-size: 30px;
+}
+
+.seat {
+  background-color: #444451;
+  height: 40px;
+  width: 45px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* TODO：待补充代码 */
+.screen1{
+  background-color: #fff;
+  height: 70px;
+  width: 100%;
+  transform: rotateX(-45deg);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+  color: #242333;
+  text-align: center;
+  line-height: 70px;
+  font-size: 30px;
+  align-self: center;
+  flex-direction: row;
+}
+.seat-area {
+  display: flex;
+  flex-wrap: wrap;
+}
+.seat:nth-child(8n + 1) {
+  margin-right: 10px;
+}
+.seat:nth-child(8n + 2) {
+  margin-right: 30px;
+}
+.seat:nth-child(8n + 3) {
+  margin-right: 10px;
+}
+.seat:nth-child(8n + 4) {
+  margin-right: 10px;
+}
+.seat:nth-child(8n + 5) {
+  margin-right: 10px;
+}
+.seat:nth-child(8n + 6) {
+  margin-right: 30px;
+}
+.seat:nth-child(8n + 7) {
+  margin-right: 10px;
+}

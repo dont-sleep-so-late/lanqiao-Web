@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>布局切换</title>
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <script
+      src="./js/axios.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <!-- TODO：请在下面实现需求 -->
+      <div class="bar">
+        <a class="grid-icon" :class="{active: current === 0}" @click="current = 0"></a>
+        <a class="list-icon" :class="{active: current === 1}" @click="current = 1"></a>
+      </div>
+      <!--grid 示例代码，动态渲染时可删除-->
+      <ul class="grid" v-if="current === 0">
+        <li v-for="item in goodsList" :key="item.title">
+          <a :href="item.url" target="_blank"> <img :src="item.image.large" /></a>
+        </li>
+      </ul>
+      <ul class="list" v-else>
+        <li v-for="item in goodsList" :key="item.title">
+          <a :href="item.url" target="_blank"> <img :src="item.image.small" /></a>
+          <p>{{item.title}}</p>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      goodsList: [],
+      current: 0
+    },
+    mounted() {
+      // TODO：补全代码实现需求
+      // 获取所有的数据，并添加到goodsList上
+      axios.get('./goodsList.json').then(
+        resolve => { 
+          this.goodsList = resolve.data
+        }
+      )
+    },
+  });
+</script>

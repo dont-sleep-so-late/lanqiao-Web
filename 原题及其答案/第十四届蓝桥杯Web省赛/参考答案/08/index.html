@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>全球新冠疫情数据统计</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" src="./js/covid-data.json"/>
+  </head>
+
+  <body>
+    <div id="app">
+      <header>
+        <div>全球新冠疫情数据统计</div>
+      </header>
+      <main>
+        <!-- TODO: 请修改以下代码实现不同国家的数据展示功能 -->
+        <div class="title">
+          <h2>{{curCountry}}</h2>
+        </div>
+        <div class="boxes">
+          <div class="box1">
+            <h3>确诊</h3>
+            <div class="number">
+              <span class="font-bold">新增:</span>
+              {{NewConfirmed}}
+            </div>
+            <div class="number">
+              <span class="font-bold">总计:</span>
+              {{TotalConfirmed}}
+            </div>
+          </div>
+          <div class="box2">
+            <h3>死亡</h3>
+            <div class="number">
+              <span class="font-bold">新增:</span>
+              {{NewDeaths}}
+            </div>
+            <div class="number">
+              <span class="font-bold">总计:</span>
+              {{TotalDeaths}}
+            </div>
+          </div>
+        </div>
+        <select @change="selChange">
+          <option value="1">Select Country</option>
+          <template v-for="(item,index) in covidData" :key="index">
+            <option :value="index+2">{{item.Country}}</option>
+          </template>
+          <!-- 请在此渲染所有国家选项 -->
+        </select>
+        <div id="chart" style="width: 100%; height: 50vh"></div>
+      </main>
+    </div>
+  </body>
+
+  <script src="js/axios.min.js"></script>
+  <script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: function () {
+        return {
+          covidData: [],
+          NewConfirmed: 0,
+          NewDeaths: 0,
+          TotalConfirmed: 0,
+          TotalDeaths: 0,
+          curCountry: '请选择国家',
+          allCountryCode: [],
+          allTotalConfirmed: []
+        }
+      },
+      methods: {
+        async init() {
+          this.covidData = await axios.get('./js/covid-data.json')
+          this.covidData.forEach(element => {
+            this.allCountryCode.push(element.CountryCode)
+            this.allTotalConfirmed.push(element.TotalConfirmed)
+          });
+          this.initChart();
+        },
+        selChange(e) {
+          console.log(e.target.value)
+          if(e.target.value < 2) {
+            this.NewConfirmed= 0
+            this.NewDeaths= 0
+            this.TotalConfirmed= 0
+            this.TotalDeaths= 0
+            this.curCountry= '请选择国家'
+            return
+          }
+          this.curCountry = this.covidData[e.target.value-2].Country
+          this.NewConfirmed = this.covidData[e.target.value-2].NewConfirmed
+          this.NewDeaths = this.covidData[e.target.value-2].NewDeaths
+          this.TotalConfirmed = this.covidData[e.target.value-2].TotalConfirmed
+          this.TotalDeaths = this.covidData[e.target.value-2].TotalDeaths
+        },
+        // TODO: 请修改该函数代码实现题目要求
+        initChart() {
+          // 初始化图表
+          this.chart = echarts.init(document.getElementById("chart"));
+          this.chartOptions = {
+            title: {
+              text: "全球感染人数前30国家累计确诊人数统计",
+              x: "center",
+            },
+            
+
+            tooltip: {
+              trigger: "axis",
+              axisPointer: {
+                type: "shadow",
+                label: {
+                  show: true,
+                },
+              },
+            },
+            // 设置x轴数据
+            xAxis: {
+              // 这里需要显示国家名称缩写，因为有些国家的全称太长，会导致界面不美观
+              data: this.allCountryCode,
+              axisLabel: {
+                show: true,
+                interval: 0,
+              },
+            },
+            yAxis: {
+              type: "value",
+              name: "确诊数量",
+            },
+            // 设置y轴数据
+            series: [
+              {
+                data: this.allTotalConfirmed,
+                type: "bar",
+                itemStyle: {
+                  normal: {
+                    color: "#a90000",
+                  },
+                },
+              },
+            ],
+          };
+          // 调用此方法设置 echarts 数据
+          this.chart.setOption(this.chartOptions);
+        },
+      },
+      // TODO: 请在此添加代码实现组件加载时数据请求的功能
+      mounted() {
+        axios.interceptors.response.use(response => {
+        // Do something before response is sent
+        return response.data;
+        },error => {
+        // Do something with response error
+        return Promise.reject(error);
+        });
+        
+        this.init();
+        
+      },
+    });
+  </script>
+</html>

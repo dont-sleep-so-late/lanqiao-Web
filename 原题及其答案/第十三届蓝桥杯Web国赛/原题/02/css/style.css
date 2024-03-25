@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 960px;
+  margin: 0 auto;
+}
+#box1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#box2 {
+  display: flex;
+  justify-content: space-between;
+}
+#box2 .item:last-child {
+  align-self: self-end;
+}
+#box3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#box3 .item:first-child{
+  align-self: flex-start;
+}
+#box3 .item:last-child {
+  align-self: flex-end;
+}
+.item {
+  display: block;
+  width: 66px;
+  height: 66px;
+}
+
+.item img {
+  width: 100%;
+  height: auto;
+}
+
+[class$="box"] {
+  width: 204px;
+  height: 204px;
+  margin: 20px;
+  background-image: linear-gradient(
+    rgb(252, 213, 136) 33.3%,
+    #fff493 0,
+    #fdf45d 66.6%,
+    #f8da47 0
+  );
+  background-size: 6px 6px;
+}
+/* 图片丢失，自己加的代码 */
+.item {
+  background-color: skyblue;
+  border-radius: 50%;
+}
+/* TODO：待补充代码 */

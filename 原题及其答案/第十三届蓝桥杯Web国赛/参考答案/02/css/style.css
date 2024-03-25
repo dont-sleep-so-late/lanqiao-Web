@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 960px;
+  margin: 0 auto;
+}
+
+.item {
+  display: block;
+  width: 66px;
+  height: 66px;
+}
+
+.item img {
+  width: 100%;
+  height: auto;
+}
+
+[class$="box"] {
+  width: 204px;
+  height: 204px;
+  margin: 20px;
+  background-image: linear-gradient(
+    rgb(252, 213, 136) 33.3%,
+    #fff493 0,
+    #fdf45d 66.6%,
+    #f8da47 0
+  );
+  background-size: 6px 6px;
+}
+/* 图片丢失，自己加的代码 */
+.item {
+  background-color: skyblue;
+  border-radius: 50%;
+}
+/* TODO：待补充代码 */
+/* 用常规的定位完成 */
+#box1 {
+  position: relative;
+}
+#box1 .item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* 用弹性盒完成 */
+#box2 {
+  display: flex;
+  /* 让盒子在水平方向上切边均匀分布 */
+  justify-content: space-between;
+}
+#box2 span:last-child {
+  align-self: flex-end;
+}
+/* 网格完成 */
+#box3 {
+  /* 创建一个网格容器 */
+  display: grid;
+  /* 设置网格在x轴的每个网格大小 */
+  grid-template-columns: 1fr 1fr 1fr;
+  /* 设置网格在y轴的每个网格大小 */
+  grid-template-rows: 1fr 1fr 1fr;
+}
+#box3 .item:nth-child(2) {
+  /* 设置第二个食材在x轴的位置 */
+  grid-column: 2 / span 1;
+  /* 设置第二个食材在y轴的位置 */
+  grid-row: 2 / span 1;
+}
+#box3 .item:last-child {
+  /* 设置最后一个食材在x轴的位置 */
+  grid-column: 3 / span 1;
+  /* 设置最后一个食材在y轴的位置 */
+  grid-row: 3 / span 1;
+}

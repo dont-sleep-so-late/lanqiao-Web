@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>全球新冠疫情数据统计</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" src="./js/covid-data.json"/>
+  </head>
+
+  <body>
+    <div id="app">
+      <header>
+        <div>全球新冠疫情数据统计</div>
+      </header>
+      <main>
+        <!-- TODO: 请修改以下代码实现不同国家的数据展示功能 -->
+        <div class="title">
+          <h2>请选择国家</h2>
+        </div>
+        <div class="boxes">
+          <div class="box1">
+            <h3>确诊</h3>
+            <div class="number">
+              <span class="font-bold">新增:</span>
+              
+            </div>
+            <div class="number">
+              <span class="font-bold">总计:</span>
+              0
+            </div>
+          </div>
+          <div class="box2">
+            <h3>死亡</h3>
+            <div class="number">
+              <span class="font-bold">新增:</span>
+              0
+            </div>
+            <div class="number">
+              <span class="font-bold">总计:</span>
+              0
+            </div>
+          </div>
+        </div>
+        <select>
+          <option value="1">Select Country</option>
+          <option value="">United States of America</option>
+          <option value="">India</option>
+          <option value="">France</option>
+          <option value="">Germany</option>
+          <option value="">Brazil</option>
+          <option value="">Japan</option>
+          <option value="">Korea(South)</option>
+          <option value="">Italy</option>
+          <option value="">United Kingdom</option>
+          <option value="">Russian Federation</option>
+          <option value="">Turkey</option>
+          <option value="">Spain</option>
+          <option value="">Viet Nam</option>
+          <option value="">Australia</option>
+          <option value="">Argentina</option>
+          <option value="">Taiwan, Republic of China</option>
+          <option value="">Netherlands</option>
+          <option value="">Iran, Islamic Republic of</option>
+          <option value="">Mexico</option>
+          <option value="">Indonesia</option>
+          <option value="">Poland</option>
+          <option value="">Colombia</option>
+          <option value="">Austria</option>
+          <option value="">Ukraine</option>
+          <option value="">Portugal</option>
+          <option value="">Greece</option>
+          <option value="">Chile</option>
+          <option value="">Malaysia</option>
+          <option value="">Israel</option>
+          <option value="">Thailand</option>
+          <!-- 请在此渲染所有国家选项 -->
+        </select>
+        <div id="chart" style="width: 100%; height: 50vh"></div>
+      </main>
+    </div>
+  </body>
+
+  <script src="js/axios.min.js"></script>
+  <script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      methods: {
+        // TODO: 请修改该函数代码实现题目要求
+        initChart() {
+          // 初始化图表
+          this.chart = echarts.init(document.getElementById("chart"));
+          this.chartOptions = {
+            title: {
+              text: "全球感染人数前30国家累计确诊人数统计",
+              x: "center",
+            },
+            
+
+            tooltip: {
+              trigger: "axis",
+              axisPointer: {
+                type: "shadow",
+                label: {
+                  show: true,
+                },
+              },
+            },
+            // 设置x轴数据
+            xAxis: {
+              // 这里需要显示国家名称缩写，因为有些国家的全称太长，会导致界面不美观
+              data: ["US", "IN", "FR", "DE", "BR", "JP", "KR", "IT", "GB", "RU", "TR", "ES", "VN","AU","AR","TW", "NL", "IR","MX", "ID", "PL", "CO", "AT", "UA", "PT", "GR", "CL", "MY", "IL", "TH"],
+              axisLabel: {
+                show: true,
+                interval: 0,
+              },
+            },
+            yAxis: {
+              type: "value",
+              name: "确诊数量",
+            },
+            // 设置y轴数据
+            series: [
+              {
+                data: [
+                  100856162, 44680355, 39560482, 37446795, 36362366, 29489769,
+                  29299166,25143705,24366197,21502402,17042722,13684258,11525408,11135105,
+                  9963697,8914351,8569095,7561428,7252944,6721095,6369442,6336660,5712491,5666050,
+                  5557941,5548487,5045602,5027790,4766786,4723919
+                ],
+                type: "bar",
+                itemStyle: {
+                  normal: {
+                    color: "#a90000",
+                  },
+                },
+              },
+            ],
+          };
+          // 调用此方法设置 echarts 数据
+          this.chart.setOption(this.chartOptions);
+        },
+      },
+      // TODO: 请在此添加代码实现组件加载时数据请求的功能
+      mounted() {
+        this.initChart();
+      },
+    });
+  </script>
+</html>

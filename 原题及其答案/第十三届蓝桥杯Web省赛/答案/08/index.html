@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+        <title>购物车</title>
+        <script src="./js/goods.js"></script>
+        <script type="text/javascript" src="./js/vue.js"></script>
+        <link href="./css/index.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 商品列表 -->
+            <h3>商品列表</h3>
+            <ul id="goodsList">
+              <template v-for="goods in goodsList" >
+                <li class="goods-item" :key="goods.id">
+                    <div><img :src="goods.imgUrl"/> </div> 
+                    <div>{{goods.name}}</div> 
+                    <div>¥ {{goods.price}} </div> 
+                    <button @click="addToCart(goods)">加入购物车</button> 
+                </li>
+              </template>
+            </ul>
+            <!-- 购物车 -->
+            <template v-if="cartList.length>0">
+              <h3>购物车</h3>
+              <ul id="cartList">
+                <template v-for="goods in cartList">
+                  <li class="goods-item" :key="goods.id">
+                      <div><img :src="goods.imgUrl"/> </div> 
+                      <div>{{goods.name}}</div> 
+                      <div>¥ {{goods.price}} </div> 
+                      <div class="item-control">
+                          <button @click="removeGoods(goods)">-</button>
+                          <h4>{{goods.num}}</h4>
+                          <button @click="addToCart(goods)">+</button> 
+                      </div>
+                  </li>
+                </template>
+              </ul>
+            </template>
+        </div>
+    </body>
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+          cartList:[],
+          goodsList:[]
+        },
+        mounted() {
+          this.goodsList = GoodsArr;
+        },
+        methods:{
+            addToCart(goods){
+                // TODO：修改当前函数，实现购物车加入商品需求
+                let currentGoods =  this.cartList.find(current => {
+                  return current.id === goods.id
+                })
+                if(!currentGoods) {
+                  // 如果在购物车里面没有找到对应的商品，则新添加一个商品到购物车里面去
+                  goods.num = 1;
+                  this.cartList.push(goods);
+                } else {
+                  // 如果找到了对应的商品，则把对应商品的数量+1
+                  currentGoods.num += 1
+                }
+                this.cartList = JSON.parse(JSON.stringify(this.cartList));
+            },
+            removeGoods(goods){
+                // TODO：补全代码实现需求
+                let currentGoodsIndex = this.cartList.findIndex(current => {
+                  return current.id === goods.id
+                })
+                if(this.cartList[currentGoodsIndex].num > 1) {
+                  // 如果当前商品在购物车的数量大于1则在当前的基础上-1
+                  this.cartList[currentGoodsIndex].num -= 1
+                } else {
+                  // 如果当前商品数量小于等于1的话，则在购物车里面移除这个商品
+                  this.cartList.splice(currentGoodsIndex,1)
+                }
+            }
+        }
+    });
+</script>

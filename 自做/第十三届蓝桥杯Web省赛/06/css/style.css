@@ -1,3 +1,129 @@
 /*
  TODO：请补充代码
 */
+html,body{
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none
+}
+
+.content {
+    width: 100%;
+}
+
+.bgc {
+    background-color: #a6b1e1;
+}
+
+.top {
+    width: 1024px;
+    height: 486px;
+    margin: 0 auto;
+}
+
+.header {
+    width: 1024px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 13px;
+}
+
+.left h1 {
+    color: white;
+    font-size: 18px;
+    text-indent: 1em;
+    font-weight: 400;
+}
+
+.right ul {
+    display: flex;
+    margin-right: 10px;
+}
+
+.right ul li {
+    color: white;
+    margin: 0 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.top .title {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.top .title h1 {
+    font-size: 45px;
+    font-weight: 400;
+}
+
+.sub-title {
+    text-align: center;
+    margin-top: 62px;
+}
+
+.sub-title h2 {
+    text-align: center;
+    font-size: 21px;
+    font-weight: 200;
+    color: white;
+}
+
+.btn {
+    text-align: center;
+    margin-top: 36px;
+}
+
+.btn button {
+    background-color: #a6b1e1;
+    color: #efbfbf;
+    border: 2px;
+    font-size: 18px;
+    box-shadow: inset 0 0 0 2px #efbfbf;
+    cursor: pointer;
+}
+
+.intro {
+    margin: 0 auto;
+    width: 1024px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 74px;
+    justify-content: space-between;
+}
+
+.box {
+    width: 502px;
+}
+
+.box h1 {
+    font-size: 30px;
+    font-weight: 200;
+    color: black;
+    line-height: 20px;
+}
+
+.box p {
+    font-size: 18px;
+    color: #aaa;
+    line-height: 1.4em;
+}
+
+.bottom {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+.protocol {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.protocol p {
+
+    font-size: 14px;
+    color: #aaa;
+}

@@ -2,6 +2,7 @@ let rollTime; // 定义定时器变量用来清除定时器
 let time = 0; // 转动次数
 let speed = 300; // 转动时间间隔
 let times; // 总转动次数
+let num = 0;
 
 // 开始按钮点击事件后开始抽奖
 $("#start").on("click", function () {
@@ -13,7 +14,12 @@ $("#start").on("click", function () {
 // TODO：请完善此函数
 function rolling() {
   time++; // 转动次数加1
-  clearTimeout(rollTime);
+  num++;
+  if (num > 8) num = 1;
+
+  $(`.li${num}`).siblings().removeClass("active");
+  $(`.li${num}`).addClass("active");
+
   rollTime = setTimeout(() => {
     window.requestAnimationFrame(rolling); // 进行递归动画
   }, speed);
@@ -22,6 +28,8 @@ function rolling() {
   if (time > times) {
     clearInterval(rollTime);
     time = 0;
+    let text = $(`.li${num}`).text();
+    $("#award").text(`恭喜您抽中了${text}!!!`);
     return;
   }
 }

@@ -1,7 +1,10 @@
 let pageNum = 1; // 当前页码，默认页码1
-let maxPage; // 最大页数
+let maxPage = 1; // 最大页数
 
 // TODO：待补充代码
+axios.get("js/carlist.json").then((res) => {
+  console.log(res.data);
+});
 
 // 点击上一页
 let prev = document.getElementById("prev");

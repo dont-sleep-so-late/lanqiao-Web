@@ -55,25 +55,11 @@ body {
 .seat-area {
   display: flex;
   flex-wrap: wrap;
-}
-.seat:nth-child(8n + 1) {
-  margin-right: 10px;
+  gap: 10px;
 }
 .seat:nth-child(8n + 2) {
-  margin-right: 30px;
-}
-.seat:nth-child(8n + 3) {
-  margin-right: 10px;
-}
-.seat:nth-child(8n + 4) {
-  margin-right: 10px;
-}
-.seat:nth-child(8n + 5) {
-  margin-right: 10px;
+  margin-right: 20px;
 }
 .seat:nth-child(8n + 6) {
-  margin-right: 30px;
-}
-.seat:nth-child(8n + 7) {
-  margin-right: 10px;
+  margin-right: 20px;
 }

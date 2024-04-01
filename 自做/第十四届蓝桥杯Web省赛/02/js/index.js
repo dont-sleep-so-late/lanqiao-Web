@@ -12,17 +12,10 @@ function createWatermark(text, color, deg, opacity, count) {
   container.className = "watermark";
 
   // TODO: 根据输入参数创建文字水印
-  const span = document.createElement("span");
-  span.innerHTML=text;
-  container.color=color;
-  container.deg=deg;
-  container.opacity=opacity;
-  container.count=count;
-  container.appendChild(span)
-  container.appendChild(span)
-  container.appendChild(span)
-  container.appendChild(span)
- console.log(container);
+  for (let i = 0; i < count; i++) {
+    container.innerHTML += `<span style="color: ${color};transform: rotate(${deg}deg);opacity: ${opacity};">${text}</span>`;
+  }
+
   return container;
 }
 

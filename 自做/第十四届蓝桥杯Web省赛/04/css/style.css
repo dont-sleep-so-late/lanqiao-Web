@@ -155,25 +155,3 @@ label.menu-btn {
 }
 
 /* TODO：待补充代码 */
-@media screen and (max-width: 800px) {
-  .row {
-    grid-template-columns: 1fr;
-  }
-  .menu li {
-    display: block;
-  }
-  .dropdown ul {
-    position: relative;
-  }
-  .collapse {
-    display: none;
-  }
-  label.menu-btn {
-  color: white;
-  display: block;
-  height: 53px;
-  }
-  input:checked.menu-btn + .collapse {
-    display: block;
-  }
-}

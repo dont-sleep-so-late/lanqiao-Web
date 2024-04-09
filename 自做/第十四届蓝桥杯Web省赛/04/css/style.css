@@ -155,3 +155,33 @@ label.menu-btn {
 }
 
 /* TODO：待补充代码 */
+@media (width<800px) {
+  .menu {
+    height: 54px;
+    padding: 0 20px;
+  }
+  .collapse {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: inherit;
+    border-top: 1px #959595 solid;
+  }
+  .collapse li {
+    display: block;
+  }
+
+  .collapse li ul {
+    position: relative;
+  }
+
+  #tutorials .row {
+    grid-template-columns: 1fr;
+  }
+
+  #tutorials .row img {
+    margin: 0;
+  }
+}

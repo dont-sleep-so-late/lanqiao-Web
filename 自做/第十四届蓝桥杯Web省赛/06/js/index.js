@@ -25,36 +25,25 @@ function renderBullet(bulletConfig, videoEle, isCreate = false) {
     spanEle.classList.add("create-bullet");
   }
   // TODO：控制弹幕的显示颜色和移动，每隔 bulletConfig.time 时间，弹幕移动的距离  bulletConfig.speed
-  spanEle.innerHTML = bulletConfig.value
-  // console.log(getEleStyle(videoEle));
-  spanEle.style.color = `rgb(${getRandomNum(255, 150)},${getRandomNum(255, 150)},${getRandomNum(255, 150)})`
-  let leftSpan = getEleStyle(videoEle).width
-  spanEle.style.left = leftSpan + 'px'
-  spanEle.style.top = getRandomNum(getEleStyle(videoEle).height - getEleStyle(spanEle).height) + 'px'
+  spanEle.style.top = getRandomNum(getEleStyle(videoEle).height) + "px";
+  spanEle.style.left = getEleStyle(videoEle).width + "px";
+  spanEle.innerText = bulletConfig.value;
+  let timer = setInterval(() => {
+    spanEle.style.left = parseInt(spanEle.style.left) - 1 + "px";
+    if (parseInt(spanEle.style.left) <= -getEleStyle(spanEle).width) {
+      videoEle.removeChild(spanEle);
+      clearInterval(timer);
+    }
+  }, 10);
   videoEle.appendChild(spanEle);
-  setInterval(() => {
-    leftSpan -= bulletConfig.speed
-    spanEle.style.left = leftSpan + 'px'
-  },bulletConfig.time)
-  console.log(bulletConfig, videoEle);
-
 }
-// 发送按钮
+
 document.querySelector("#sendBulletBtn").addEventListener("click", () => {
   // TODO:点击发送按钮，输入框中的文字出现在弹幕中
-  const _bulletContent = document.getElementById('bulletContent');
-  const _value = bulletContent.value;
-  bulletContent.value = ''
-  const _bulletConfig = {
-    isHide: false, // 是否隐藏
-    speed: 5, // 弹幕的移动距离
-    time: 50, // 弹幕每隔多少ms移动一次
-    value: "", // 弹幕的内容
-  }
-  _bulletConfig.value = _value
-  renderBullet(_bulletConfig, videoEle,true);
-  // const danmu = document.getElementsByName("creat-bullet");
-  // return danmu;
+  let bulletContent = document.querySelector("#bulletContent");
+  bulletConfig.value = bulletContent.value;
+  bulletContent.value = "";
+  renderBullet(bulletConfig, videoEle, true);
 });
 
 function getEleStyle(ele) {

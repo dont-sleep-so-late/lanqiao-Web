@@ -161,7 +161,7 @@ label.menu-btn {
     padding: 0 20px;
   }
   .collapse {
-    display: block;
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
@@ -172,9 +172,18 @@ label.menu-btn {
   .collapse li {
     display: block;
   }
-
   .collapse li ul {
     position: relative;
+  }
+
+  label.menu-btn {
+    display: block;
+    color: white;
+    height: 54px;
+    padding: 15px;
+  }
+  input:checked.menu-btn .collapse {
+    display: block;
   }
 
   #tutorials .row {
